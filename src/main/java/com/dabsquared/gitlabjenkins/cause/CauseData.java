@@ -36,6 +36,7 @@ public final class CauseData {
     private final String mergeRequestDescription;
     private final Integer mergeRequestId;
     private final Integer mergeRequestIid;
+    private final Integer mergeRequestTargetProjectId;
     private final String targetBranch;
     private final String targetRepoName;
     private final String targetNamespace;
@@ -52,9 +53,9 @@ public final class CauseData {
     CauseData(ActionType actionType, Integer sourceProjectId, Integer targetProjectId, String branch, String sourceBranch, String userName,
               String userEmail, String sourceRepoHomepage, String sourceRepoName, String sourceNamespace, String sourceRepoUrl,
               String sourceRepoSshUrl, String sourceRepoHttpUrl, String mergeRequestTitle, String mergeRequestDescription, Integer mergeRequestId,
-              Integer mergeRequestIid, String targetBranch, String targetRepoName, String targetNamespace, String targetRepoSshUrl,
-              String targetRepoHttpUrl, String triggeredByUser, String before, String after, String lastCommit, String targetProjectUrl,
-              String triggerPhrase) {
+              Integer mergeRequestIid, Integer mergeRequestTargetProjectId, String targetBranch, String targetRepoName, String targetNamespace,
+              String targetRepoSshUrl, String targetRepoHttpUrl, String triggeredByUser, String before, String after, String lastCommit,
+              String targetProjectUrl, String triggerPhrase) {
         this.actionType = checkNotNull(actionType, "actionType must not be null.");
         this.sourceProjectId = checkNotNull(sourceProjectId, "sourceProjectId must not be null.");
         this.targetProjectId = checkNotNull(targetProjectId, "targetProjectId must not be null.");
@@ -72,6 +73,7 @@ public final class CauseData {
         this.mergeRequestDescription = mergeRequestDescription == null ? "" : mergeRequestDescription;
         this.mergeRequestId = mergeRequestId;
         this.mergeRequestIid = mergeRequestIid;
+        this.mergeRequestTargetProjectId = mergeRequestTargetProjectId;
         this.targetBranch = checkNotNull(targetBranch, "targetBranch must not be null.");
         this.targetRepoName = checkNotNull(targetRepoName, "targetRepoName must not be null.");
         this.targetNamespace = checkNotNull(targetNamespace, "targetNamespace must not be null.");
@@ -102,6 +104,7 @@ public final class CauseData {
         variables.put("gitlabMergeRequestDescription", mergeRequestDescription);
         variables.put("gitlabMergeRequestId", mergeRequestId == null ? "" : mergeRequestId.toString());
         variables.put("gitlabMergeRequestIid", mergeRequestIid == null ? "" : mergeRequestIid.toString());
+        variables.put("gitlabMergeRequestTargetProjectId", mergeRequestTargetProjectId == null ? "" : mergeRequestTargetProjectId.toString());
         variables.put("gitlabMergeRequestLastCommit", lastCommit);
         variables.put("gitlabTargetBranch", targetBranch);
         variables.put("gitlabTargetRepoName", targetRepoName);
@@ -182,6 +185,10 @@ public final class CauseData {
         return mergeRequestIid;
     }
 
+    public Integer getMergeRequestTargetProjectId() {
+        return mergeRequestTargetProjectId;
+    }
+
     public String getTargetBranch() {
         return targetBranch;
     }
@@ -253,6 +260,7 @@ public final class CauseData {
             .append(mergeRequestDescription, causeData.mergeRequestDescription)
             .append(mergeRequestId, causeData.mergeRequestId)
             .append(mergeRequestIid, causeData.mergeRequestIid)
+            .append(mergeRequestTargetProjectId, causeData.mergeRequestTargetProjectId)
             .append(targetBranch, causeData.targetBranch)
             .append(targetRepoName, causeData.targetRepoName)
             .append(targetNamespace, causeData.targetNamespace)
@@ -286,6 +294,7 @@ public final class CauseData {
             .append(mergeRequestDescription)
             .append(mergeRequestId)
             .append(mergeRequestIid)
+            .append(mergeRequestTargetProjectId)
             .append(targetBranch)
             .append(targetRepoName)
             .append(targetNamespace)
@@ -319,6 +328,7 @@ public final class CauseData {
             .append("mergeRequestDescription", mergeRequestDescription)
             .append("mergeRequestId", mergeRequestId)
             .append("mergeRequestIid", mergeRequestIid)
+            .append("mergeRequestTargetProjectId", mergeRequestTargetProjectId)
             .append("targetBranch", targetBranch)
             .append("targetRepoName", targetRepoName)
             .append("targetNamespace", targetNamespace)
